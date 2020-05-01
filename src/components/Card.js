@@ -6,7 +6,7 @@ class Card extends React.Component{
         return (
             <div>
                 <div>
-                    <h1>Bienvenidxs a Chotuve!!</h1>
+                    <h1>Bienvenidxs a Chotuve!</h1>
                     <p> Plataforma para ver y compartir videos</p>
                 </div>
                 <div>
