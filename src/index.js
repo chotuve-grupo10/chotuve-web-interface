@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Card from './components/Card'
+import Ping from './components/Ping'
+
 
 const container = document.getElementById('root')
 
-ReactDOM.render(<Card />,container)
+ReactDOM.render(<Ping />,container)
