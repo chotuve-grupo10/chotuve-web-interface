@@ -29,7 +29,7 @@ class Ping extends React.Component{
 
     clickHandler(){
         this.fetchStatus();    
-        const { serverStatus, isEmpty } = this.state;
+        const { serverStatus } = this.state;
         
         return (
             <div className="card text-center m-3">
