@@ -8,7 +8,6 @@ class Ping extends React.Component{
 
         this.state = {
             serverStatus: null,
-            isEmpty: true,
         };
         
         
@@ -20,16 +19,12 @@ class Ping extends React.Component{
         // Se espera estado de respuesta
         var data = await response.status;
         // 200 is Ok
-        if (data == 200){
+        if (data === 200){
             data = 'Server Ok!';
         } else {
             data = 'Server NO OK.';
-        }
-        
+        }   
         this.setState({ serverStatus: data });
-        this.setState({ isEmpty: !this.isEmpty});
-       
-
     }
 
     clickHandler(){
