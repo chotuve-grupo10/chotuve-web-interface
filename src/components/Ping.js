@@ -15,7 +15,7 @@ class Ping extends React.Component{
 
     async fetchStatus() {
         // GET
-        const response = await fetch('https://jsonplaceholder.typicode.com/users/');
+        const response = await fetch('https://cors-anywhere.herokuapp.com/https://chotuve-auth-server-dev.herokuapp.com/api/ping');
         // Se espera estado de respuesta
         var data = await response.status;
         // 200 is Ok
