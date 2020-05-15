@@ -1,8 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Ping from './components/Ping'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import Login from  './pages/login'
 
+const root = (
+    <BrowserRouter>
+        <Switch>
+            <Route path="/login" component={Login} />
+            <Redirect from="/" to="/login" />
+        </Switch>   
+    </BrowserRouter>
+)
 
-const container = document.getElementById('root')
-
-ReactDOM.render(<Ping />,container)
+ReactDOM.render(root,document.getElementById('root'));
