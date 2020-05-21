@@ -3,7 +3,7 @@ import {startUi} from '../../services/firebase';
 
 class Login extends React.Component{
     componentDidMount(){
-        startUi('#firebaseui');
+        startUi('#firebaseui')
     }
 
     render() {

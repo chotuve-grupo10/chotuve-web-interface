@@ -17,8 +17,12 @@ var firebaseConfig = {
 
 const uiConfig = {
     signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        //firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     ],
+    signInSuccessUrl: '/dashboard', //redirecciona en caso de que se haga el login
+  
 };
 
 
@@ -37,6 +41,6 @@ db.settings({
 
   //login
   export const startUi = (elementId) => {
-      const ui = new firebaseui.auth.AuthUI(auth);
-      ui.start(elementId, uiConfig);
+       const ui = new firebaseui.auth.AuthUI(auth);
+       ui.start(elementId, uiConfig);
   };
