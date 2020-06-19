@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Login from  './pages/login'
 import Dashboard from './pages/dashboard'
 
+
 const root = (
     <BrowserRouter>
         <Switch>

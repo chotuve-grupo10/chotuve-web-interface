@@ -1,7 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
+    plugins: [new Dotenv()],
     entry: './src/index.js',
     output: {
         path: path.join(__dirname, 'dist'),
