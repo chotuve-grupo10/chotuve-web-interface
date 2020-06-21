@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { Alert } from 'reactstrap';
 
 //import {startUi} from '../../services/firebase';
 
@@ -12,6 +13,7 @@ class Login extends React.Component{
             username:'',
             password:'',
             token: '',
+            error:'',
             loggedIn: false
         }
         this.onChange = this.onChange.bind(this)
@@ -53,6 +55,7 @@ class Login extends React.Component{
             if (data.Token){
                 componente.setState({token: data.Token})
                 componente.setState({loggedIn : true})
+                componente.setState({error: ''})
                 //Imprime por pantalla los datos
                 console.log("Logged in")
                 console.log('User:'+componente.state.username)
@@ -62,6 +65,7 @@ class Login extends React.Component{
             //Si recibe un error de Login
             if (data.Login){
                 console.log(data.Login);
+                componente.setState({error: 'Usuario y/o contraseña inválidos'})
             }
           }).catch(function(res){
               console.log(res)
@@ -77,11 +81,16 @@ class Login extends React.Component{
         return (
             <div>
                 <h1> Login </h1>
-            
+                <hr  className="my-3"/>
+                {
+                    this.state.error !== ''? (
+                        <Alert color="danger" className="text-center"> {this.state.error} </Alert>
+                    ) : ''
+                }
             <form onSubmit={this.submitForm}>
-                <input type="text" placeholder="username" name="username" value={this.state.username} onChange={this.onChange} />
+                <input type="text" placeholder="Email" name="username" value={this.state.username} onChange={this.onChange} />
                 <br/>
-                <input type="password" placeholder="password" name="password" value={this.state.password} onChange={this.onChange} />
+                <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.onChange} />
                 <br/>
                 {/* <input type="submit" /> */}
                 <button onClick={this.onEnterClicked} disabled={this.state.username.length === 0} className="enter-btn">Log in</button>
@@ -109,3 +118,4 @@ class Login extends React.Component{
 }
 
 export default Login;
+
