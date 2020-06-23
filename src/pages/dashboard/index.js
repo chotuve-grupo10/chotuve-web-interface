@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom'
+// import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class Dashboard extends React.Component{
 
