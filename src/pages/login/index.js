@@ -6,7 +6,7 @@ import { Alert } from 'reactstrap';
 
 
 class Login extends React.Component{
-    
+
     constructor(props){
         super(props)
         const token = localStorage.getItem('token');
@@ -24,35 +24,33 @@ class Login extends React.Component{
         this.onChange = this.onChange.bind(this)
         this.onEnterClicked = this.onEnterClicked.bind(this)
     }
-    
+
     onChange(event){
         this.setState({
             [event.target.name]: event.target.value
         })
     }
-    
-    
+
+
     async onEnterClicked(event){
-        event.preventDefault()        
+        event.preventDefault()
         const user = {
             email: this.state.username,
             password: this.state.password
         };
         let componente = this;
-        
+
         fetch('/api/login',
         {    headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'text/plain',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Content-Type, Accept',
             },
             method: 'POST',
             body: JSON.stringify(user),
             crossorigin: true,
-           
+
         } )
-        
+
       .then(function(res) {
           return res.json()})
       .then(function (data){
@@ -67,7 +65,7 @@ class Login extends React.Component{
                 console.log('Pass:'+componente.state.password)
                 console.log('Token:'+componente.state.token)
                 localStorage.setItem('username', componente.state.username);
-                localStorage.setItem('token', data.Token); 
+                localStorage.setItem('token', data.Token);
             }
             //Si recibe un error de Login
             if (data.Login){
@@ -104,8 +102,8 @@ class Login extends React.Component{
 
             </form>
             </div>
-            
-            
+
+
             );
     }
 
@@ -118,7 +116,7 @@ class Login extends React.Component{
 
     // render() {
     //     return (
-    //         
+    //
     //         <div id="firebaseui"></div>
     //     );
     // }
