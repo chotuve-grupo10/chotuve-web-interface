@@ -56,16 +56,9 @@ class Login extends React.Component{
       .then(function (data){
             //Si recibe un Token
             if (data.Token){
-                componente.setState({token: data.Token})
-                componente.setState({loggedIn : true})
-                componente.setState({error: ''})
-                //Imprime por pantalla los datos
-                console.log("Logged in")
-                console.log('User:'+componente.state.username)
-                console.log('Pass:'+componente.state.password)
-                console.log('Token:'+componente.state.token)
-                localStorage.setItem('username', componente.state.username);
-                localStorage.setItem('token', data.Token);
+                componente.setState({token: data.Token,
+                                     error: '',
+                                     loggedIn: true})
             }
             //Si recibe un error de Login
             if (data.Login){
@@ -77,6 +70,10 @@ class Login extends React.Component{
           });
     }
 
+    componentDidUpdate(){
+        localStorage.setItem('username', this.state.username);
+        localStorage.setItem('token', this.state.token);
+    }
 
     render() {
         if (this.state.loggedIn){
