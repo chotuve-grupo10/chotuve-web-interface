@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Ping from './components/Ping'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App';
 
-
-const container = document.getElementById('root')
-
-ReactDOM.render(<Ping />,container)
+ReactDOM.render(<App />, document.getElementById('root'));
+//ReactDOM.render(root,document.getElementById('root'));
