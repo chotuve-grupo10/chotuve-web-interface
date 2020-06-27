@@ -1,7 +1,5 @@
 import React from 'react';
-// import {Link, Redirect} from 'react-router-dom'
-import {Link} from 'react-router-dom'
-
+import NavigationMenu from '../../components/navigationMenu'
 class Dashboard extends React.Component{
 
     constructor(props){
@@ -18,7 +16,7 @@ class Dashboard extends React.Component{
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
         let loggedIn = true
-        if (token == null){
+        if (token === null){
             loggedIn = false
         }
         this.setState({username , token, loggedIn })
@@ -26,10 +24,11 @@ class Dashboard extends React.Component{
 
     render() {
         return (
-            <div>
-               <h1>Bienvenido {this.state.username}!</h1> 
-               <Link to="/logout" className="btn btn-outline-primary">Logout</Link>
+            <div classname="container">
+                <NavigationMenu/>
+                <h6>Bienvenido {this.state.username}!</h6>
             </div>
+            
         );
     }
 }

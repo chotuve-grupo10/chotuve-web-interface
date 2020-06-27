@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 class Logout extends React.Component{
 
   
-    componentWillMount() {
+    componentDidMount() {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
     }

@@ -10,16 +10,16 @@ class Login extends React.Component{
     constructor(props){
         super(props)
         const token = localStorage.getItem('token');
-        let loggedIn = true
-        if (token == null){
-            loggedIn = false
+        let isLoggedIn = true
+        if (token === null){
+            isLoggedIn = false
         }
         this.state = {
             username:'',
             password:'',
             error:'',
             token,
-            loggedIn
+            loggedIn: isLoggedIn
         }
         this.onChange = this.onChange.bind(this)
         this.onEnterClicked = this.onEnterClicked.bind(this)
@@ -71,9 +71,12 @@ class Login extends React.Component{
     }
 
     componentDidUpdate(){
-        localStorage.setItem('username', this.state.username);
-        localStorage.setItem('token', this.state.token);
+        if (this.state.token !== null) {
+            localStorage.setItem('username', this.state.username);
+            localStorage.setItem('token', this.state.token);
+        }
     }
+    
 
     render() {
         if (this.state.loggedIn){
