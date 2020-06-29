@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, Redirect} from 'react-router-dom'
 import NavigationMenu from '../../components/navigationMenu'
 import UsersList from '../../components/userslist'
+import { Alert } from 'reactstrap';
 
 
 
@@ -13,6 +14,7 @@ class ABMUsuarios extends React.Component{
             username: '',
             token: null,
             loggedIn: false,
+            error: '',
             users:[]   
         }
     }
@@ -43,8 +45,12 @@ class ABMUsuarios extends React.Component{
         .then(function(res) {
             return res.json()})
         .then(function (data){
-            console.log(data)
-            componente.setState({users: data})
+            console.log(data.Error)
+            if(data.Error !== undefined){
+                componente.setState({error: 'Usted no puede administrar usuarios pues no es usuario administrador'})
+            } else {
+                componente.setState({users: data})
+            }
         })}
 
     render() {
@@ -52,10 +58,15 @@ class ABMUsuarios extends React.Component{
             return <Redirect to="/"/>
         }
         return (
-            <div>
+            <div>              
                 <NavigationMenu />
-                 <h1>Lista de Usuarios</h1>
-                 <UsersList users={this.state.users}/>
+                 <h1>Administración de Usuarios</h1>
+                 {
+                    this.state.error !== ''? (
+                        <Alert color="danger" className="text-center"> {this.state.error} </Alert>
+                    ) : <UsersList users={this.state.users}/>
+                }
+                 
                 <Link to="/dashboard"> Volver</Link>
             </div>
         );
