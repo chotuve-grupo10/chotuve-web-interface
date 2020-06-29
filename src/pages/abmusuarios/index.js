@@ -1,6 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import NavigationMenu from '../../components/navigationMenu'
+import UsersList from '../../components/userslist'
+
 
 
 class ABMUsuarios extends React.Component{
@@ -11,7 +13,7 @@ class ABMUsuarios extends React.Component{
             username: '',
             token: null,
             loggedIn: false,
-            users:''   
+            users:[]   
         }
     }
     
@@ -42,19 +44,18 @@ class ABMUsuarios extends React.Component{
             return res.json()})
         .then(function (data){
             console.log(data)
-            const renObjData = data.map(function(user, idx) {
-                return <p key={idx}>{user["email"]}, {user["full name"]}</p>;
-        })
-        componente.setState({users: renObjData})
-
-    })}
+            componente.setState({users: data})
+        })}
 
     render() {
+        if (this.state.loggedIn === false){
+            return <Redirect to="/"/>
+        }
         return (
             <div>
                 <NavigationMenu />
                  <h1>Lista de Usuarios</h1>
-                 <h6>{this.state.users}</h6>
+                 <UsersList users={this.state.users}/>
                 <Link to="/dashboard"> Volver</Link>
             </div>
         );

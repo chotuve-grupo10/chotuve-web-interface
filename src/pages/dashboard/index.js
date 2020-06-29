@@ -1,5 +1,7 @@
 import React from 'react';
 import NavigationMenu from '../../components/navigationMenu'
+import { Redirect } from 'react-router-dom';
+
 class Dashboard extends React.Component{
 
     constructor(props){
@@ -23,6 +25,9 @@ class Dashboard extends React.Component{
     }
 
     render() {
+        if (this.state.loggedIn === false){
+            return <Redirect to="/"/>
+        }
         return (
             <div classname="container">
                 <NavigationMenu/>
