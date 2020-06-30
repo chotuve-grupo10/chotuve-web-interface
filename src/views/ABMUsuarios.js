@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link, Redirect} from 'react-router-dom'
-import NavigationMenu from '../../components/navigationMenu'
-import UsersList from '../../components/userslist'
+import UsersList from '../components/userslist'
 import { Alert } from 'reactstrap';
 
 
@@ -59,7 +58,6 @@ class ABMUsuarios extends React.Component{
         }
         return (
             <div>              
-                <NavigationMenu />
                  <h1>Administración de Usuarios</h1>
                  {
                     this.state.error !== ''? (
@@ -67,7 +65,7 @@ class ABMUsuarios extends React.Component{
                     ) : <UsersList users={this.state.users}/>
                 }
                  
-                <Link to="/dashboard"> Volver</Link>
+                <Link to="/home"> Volver</Link>
             </div>
         );
     }

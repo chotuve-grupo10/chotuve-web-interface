@@ -80,7 +80,7 @@ class Login extends React.Component{
 
     render() {
         if (this.state.loggedIn){
-            return <Redirect to="/dashboard"/>
+            return <Redirect to="/home"/>
         }
         //Agregar if para error de logueo
         return (
