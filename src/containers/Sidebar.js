@@ -1,6 +1,6 @@
 import React from 'react';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Home from '../views/Home'

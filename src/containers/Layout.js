@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  Content,
-  Sidebar,
-  Footer,
-  Header
+//  Content,
+//  Footer,
+//  Header,
+  Sidebar
 } from './index'
 import Navbar from 'react-bootstrap/Navbar';
 
