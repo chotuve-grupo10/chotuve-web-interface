@@ -12,8 +12,8 @@ class Layout extends React.Component {
   render() {
     return (
       <div className='content-wrapper'>
-        <Navbar bg="dark">
-          <Navbar.Brand href="#home">
+        <Navbar className='d-flex flex-column flex-md-row' bg="dark">
+          <Navbar.Brand href="/home">
             <img
               src="https://react-bootstrap.github.io/logo.svg"
               width="30"
