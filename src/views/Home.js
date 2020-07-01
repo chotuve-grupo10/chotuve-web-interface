@@ -24,7 +24,6 @@ class Home extends React.Component {
 
   render() {
       if (this.state.loggedIn === false){
-          console.log("entra por aca")
           return <Redirect to="/"/>
       }
       return (
