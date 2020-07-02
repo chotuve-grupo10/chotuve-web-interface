@@ -3,8 +3,6 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import 'rsuite/dist/styles/rsuite-default.css';
 import { Container, Header, Sidebar, Content } from 'rsuite';
 import { TheSidebar, TheHeader } from './index'
-import Home from '../views/Home'
-import AppServers from '../views/AppServers';
 import views from './views'
 import Spinner from '../components/Spinner/Spinner'
 
