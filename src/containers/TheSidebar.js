@@ -14,7 +14,7 @@ class TheSidebar extends React.Component {
               return (
                 <Link to={view.path}>
                   <Nav.Item eventKey={idx} icon={<Icon icon={view.icon} />}>
-                    {view.text}
+                    {view.name}
                   </Nav.Item>
                 </Link>
               )
