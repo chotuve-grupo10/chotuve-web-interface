@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link, useLocation} from "react-router-dom";
-import {deleteUser} from '../../apliClient'
+//import {deleteUser} from '../../apliClient'
 
 function User() {
  let data = useLocation();
@@ -8,7 +8,7 @@ function User() {
  console.log(data.state.user); 
  return (
         <div>
-            <img src={data.state.user["profile picture"]}/>
+            <img src={data.state.user["profile picture"]} alt="Profile"/>
             
             <h6>Full name: {data.state.user["full name"]}</h6>
             <h6>Email: {data.state.user.email}</h6>

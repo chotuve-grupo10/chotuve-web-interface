@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, Redirect} from 'react-router-dom'
 import UsersList from '../components/userslist'
 import { Alert } from 'reactstrap';
+import {getUsers} from '../apliClient'
 
 
 
@@ -31,16 +32,7 @@ class ABMUsuarios extends React.Component{
     componentDidMount(){
         const token = this.state.token;
         let componente = this;
-        fetch('/api/users',
-        {    headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'text/plain',
-                'authorization': token
-            },
-            method: 'GET',
-            crossorigin: true,
-
-        } )
+        getUsers(token)
         .then(function(res) {
             return res.json()})
         .then(function (data){
@@ -63,8 +55,7 @@ class ABMUsuarios extends React.Component{
                     this.state.error !== ''? (
                         <Alert color="danger" className="text-center"> {this.state.error} </Alert>
                     ) : <UsersList users={this.state.users}/>
-                }
-                 
+                }             
                 <Link to="/home"> Volver</Link>
             </div>
         );

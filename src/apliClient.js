@@ -1,5 +1,5 @@
-import React from 'react'
-import {Redirect} from 'react-router-dom'
+//import React from 'react'
+//import {Redirect} from 'react-router-dom'
 
 function loginAuth(user) {
     return (fetch('/api/login',
@@ -13,6 +13,19 @@ function loginAuth(user) {
 
     } ))
    
+}
+
+function getUsers(token){
+    return (fetch('/api/users',
+        {    headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'text/plain',
+                'authorization': token
+            },
+            method: 'GET',
+            crossorigin: true,
+
+        }))
 }
 
 function deleteUser(email,token) {
@@ -29,4 +42,5 @@ function deleteUser(email,token) {
 
 }
 export {loginAuth};
+export {getUsers};
 export {deleteUser};
