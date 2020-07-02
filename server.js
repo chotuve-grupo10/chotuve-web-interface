@@ -10,7 +10,7 @@ const target = `${process.env.REACT_APP_AUTH_SERVER || process.env.AUTH_SERVER |
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(
-  createProxyMiddleware("/api/login", {
+  createProxyMiddleware("/api", {
   target: target,
   changeOrigin: true
 }));
