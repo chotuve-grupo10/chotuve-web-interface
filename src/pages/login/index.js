@@ -11,16 +11,20 @@ class Login extends React.Component{
     constructor(props){
         super(props)
         const token = localStorage.getItem('token');
-        let isLoggedIn = true
-        if (token === null){
-            isLoggedIn = false
+        let loggedIn = true
+        // Efecto colateral: cuando se graba un valor null en localStorage,
+        // se graba como el string 'null'
+        // TODO evitar que se grabe el valor null en localStorage
+        // (Esto sucede en el componentDidUpdate cuando se ingresa a la pantalla)
+        if (!token || token === 'null'){
+            loggedIn = false
         }
         this.state = {
             username:'',
             password:'',
             error:'',
             token,
-            loggedIn: isLoggedIn
+            loggedIn: loggedIn
         }
         this.onChange = this.onChange.bind(this)
         this.onEnterClicked = this.onEnterClicked.bind(this)

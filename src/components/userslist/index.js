@@ -8,7 +8,7 @@ class UsersList extends React.Component{
             <div>               
                 {this.props.users.map(function(user, idx) {
                  return [<h5 key={idx}>{user["full name"]}</h5>,
-                        <Link to={{pathname: `/abmusuarios/user/${user["email"]}`,state:{user:user}}}>View Profile</Link>,
+                        <Link to={{pathname: `/users/${user["email"]}`,state:{user:user}}}>View Profile</Link>,
                         <h6>-----------------------------------</h6>];
                 })}
                

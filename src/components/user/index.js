@@ -14,7 +14,7 @@ function User() {
             <h6>Email: {data.state.user.email}</h6>
             <h6>Phone number: {data.state.user["phone number"]}</h6>
             {/* <button onClick={() =>{deleteUser(data.state.user.email, token)}} className="enter-btn">Delete</button> TODO falta ajustar algunas cosas*/}
-            <Link to="/abmusuarios">Volver</Link>
+            <Link to="/users">Volver</Link>
         </div>
  )
 

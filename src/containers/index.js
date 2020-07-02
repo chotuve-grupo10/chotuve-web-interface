@@ -1,13 +1,9 @@
-//import Content from './Content'
-//import Footer from './Footer'
-//import Header from './Header'
+import TheHeader from './TheHeader'
 import Layout from './Layout'
-import Sidebar from './Sidebar'
+import TheSidebar from './TheSidebar'
 
 export {
-//  Content,
-//  Footer,
-//  Header,
+  TheHeader,
   Layout,
-  Sidebar
+  TheSidebar
 }
