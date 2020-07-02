@@ -11,7 +11,8 @@ const Routes = () => (
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <Route path="/home" name="Home" render={props => <Layout {...props}/>} />
-        <Route path="/abmusuarios" name="ABM Usuarios" render={props => <Layout {...props}/>} />
+        <Route exact path="/abmusuarios" name="ABMUsuarios" render={props => <Layout {...props}/>} />
+        <Route path="/ambusuarios/user/:userId" name="User" render={props => <Layout {...props}/>} />
         <Redirect from="/" to="/login" />
     </Switch>   
 </BrowserRouter>

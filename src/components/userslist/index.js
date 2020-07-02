@@ -1,19 +1,28 @@
 import React from 'react';
+import {Link, Route} from 'react-router-dom'
+import User from '../user'
 
 class UsersList extends React.Component{
-    
 
+    constructor(props){
+        super(props)
+        this.clicked = this.clicked.bind(this)
+
+    }
+    clicked(){
+        console.log('click!')
+    }
+
+  
     render() {
         return (
             <div>               
-                {/* {this.props.users.map((user, i) => <User key={i} {...user}/>)} */}
                 {this.props.users.map(function(user, idx) {
-                 return [<h5 key={idx}>{user["email"]}</h5>,
-                                    <h6>Full name: {user["full name"]}</h6>,
-                                    <h6>Phone number: {user["phone number"]}</h6>,
-                                    <button className="enter-btn" disabled>Editar</button>,
-                                    <h6>-----------------------------------</h6>];
+                 return [<h5 key={idx}>{user["full name"]}</h5>,
+                        <Link to={{pathname: `/abmusuarios/user/${user["email"]}`,state:{user:user}}}>View Profile</Link>,
+                        <h6>-----------------------------------</h6>];
                 })}
+               
             </div>
         );
     }

@@ -6,6 +6,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import Home from '../views/Home'
 import AppServers from '../views/AppServers'
 import ABMUsuarios from '../views/ABMUsuarios';
+import User from '../components/user'
 
 
 class Sidebar extends React.Component {
@@ -52,8 +53,9 @@ class Sidebar extends React.Component {
                 </SideNav>
                 <main>
                     <Route path="/home" component={props => <Home />} />
-                    <Route path="/abmusuarios" component={props => <ABMUsuarios />} />
+                    <Route exact path="/abmusuarios" component={props => <ABMUsuarios />} />
                     <Route path="/app-servers" component={props => <AppServers />} />
+                    <Route path="/abmusuarios/user/:userId" component={props => <User />} />
                 </main>
             </React.Fragment>
         )}
