@@ -9,16 +9,18 @@ import AppServers from '../views/AppServers';
 class Layout extends React.Component {
   render(props) {
     const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+
     if (!token || token === 'null') {
       return <Redirect to="/login" />;
     }
     return (
       <Container>
-        <Header className="fondoNegro">
-          <TheHeader />
+        <Header>
+          <TheHeader username={username}/>
         </Header>
         <Container>
-          <Sidebar className="fondoRojo fixed">
+          <Sidebar className="fixed">
             <TheSidebar />
           </Sidebar>
           <Content>
