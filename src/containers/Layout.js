@@ -31,7 +31,7 @@ class Layout extends React.Component {
                   return view.component && (
                     <Route
                       key={idx}
-                      path={view.path}
+                      exact path={view.path}
                       name={view.name}
                       render={props => (
                         <view.component {...props} />
