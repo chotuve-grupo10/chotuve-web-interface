@@ -1,3 +1,11 @@
-.App {
-  margin-left: 64px;
+.fondoNegro {
+  background-color: green
+}
+
+.fondoRojo {
+  background-color: red
+}
+
+.brand-text {
+  font-size: 1.5em;
 }

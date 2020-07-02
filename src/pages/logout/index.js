@@ -14,7 +14,7 @@ class Logout extends React.Component{
         return (
             <div>
                  <h1>Has salido de la sesión!</h1>
-                <Link to="/"> Logueate nuevamente</Link>
+                <Link to="/login"> Logueate nuevamente</Link>
             </div>
         );
     }

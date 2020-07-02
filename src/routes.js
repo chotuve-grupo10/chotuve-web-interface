@@ -10,10 +10,9 @@ const Routes = () => (
     <BrowserRouter>
     <Switch>
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/home" name="Home" render={props => <Layout {...props}/>} />
-        <Route path="/login" component={Login} />
-        <Route path="/logout" component={Logout} />
-        <Redirect from="/" to="/login" />
+        <Route exact path="/login" render={props => <Login {...props}/>} />
+        <Route exact path="/logout" render={props => <Logout {...props}/>} />
+        <Route path="/" name="Home" render={props => <Layout {...props}/>} />
     </Switch>   
 </BrowserRouter>
 );

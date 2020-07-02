@@ -11,7 +11,11 @@ class Login extends React.Component{
         super(props)
         const token = localStorage.getItem('token');
         let loggedIn = true
-        if (token == null){
+        // Efecto colateral: cuando se graba un valor null en localStorage,
+        // se graba como el string 'null'
+        // TODO evitar que se grabe el valor null en localStorage
+        // (Esto sucede en el componentDidUpdate cuando se ingresa a la pantalla)
+        if (!token || token === 'null'){
             loggedIn = false
         }
         this.state = {
@@ -77,7 +81,7 @@ class Login extends React.Component{
 
     render() {
         if (this.state.loggedIn){
-            return <Redirect to="/dashboard"/>
+            return <Redirect to="/home"/>
         }
         //Agregar if para error de logueo
         return (
