@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import 'rsuite/dist/styles/rsuite-default.css';
 import { Container, Header, Sidebar, Content } from 'rsuite';
 import { TheSidebar, TheHeader } from './index'
@@ -8,6 +8,10 @@ import AppServers from '../views/AppServers';
 
 class Layout extends React.Component {
   render(props) {
+    const token = localStorage.getItem('token');
+    if (!token || token === 'null') {
+      return <Redirect to="/login" />;
+    }
     return (
       <Container>
         <Header className="fondoNegro">
