@@ -6,7 +6,7 @@ import {getUsers} from '../apliClient'
 
 
 
-class Users extends React.Component{
+class ABMUsuarios extends React.Component{
 
     constructor(props){
         super(props)
@@ -46,7 +46,7 @@ class Users extends React.Component{
 
     render() {
         if (this.state.loggedIn === false){
-            return <Redirect to="/login"/>
+            return <Redirect to="/"/>
         }
         return (
             <div>              
@@ -62,4 +62,4 @@ class Users extends React.Component{
     }
 }
 
-export default Users;
+export default ABMUsuarios;

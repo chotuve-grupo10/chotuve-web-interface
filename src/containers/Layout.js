@@ -4,6 +4,7 @@ import 'rsuite/dist/styles/rsuite-default.css';
 import { Container, Header, Sidebar, Content } from 'rsuite';
 import { TheSidebar, TheHeader } from './index'
 import views from './views'
+import User from '../components/user'
 import Spinner from '../components/Spinner/Spinner'
 
 class Layout extends React.Component {
@@ -30,13 +31,14 @@ class Layout extends React.Component {
                   return view.component && (
                     <Route
                       key={idx}
-                      path={view.path}
+                      exact path={view.path}
                       name={view.name}
                       render={props => (
                         <view.component {...props} />
                       )} />
                   )
                 })}
+                <Route path="/users/:userId" name="User" render={props => <User />} />
               </Switch>
             </Suspense>
           </Content>

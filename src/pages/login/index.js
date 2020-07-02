@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Alert } from 'reactstrap';
+import {loginAuth} from '../../apliClient'
 
 //import {startUi} from '../../services/firebase';
 
@@ -23,7 +24,7 @@ class Login extends React.Component{
             password:'',
             error:'',
             token,
-            loggedIn
+            loggedIn: loggedIn
         }
         this.onChange = this.onChange.bind(this)
         this.onEnterClicked = this.onEnterClicked.bind(this)
@@ -43,41 +44,33 @@ class Login extends React.Component{
             password: this.state.password
         };
         let componente = this;
-
-        fetch('/api/login',
-        {    headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'text/plain',
-            },
-            method: 'POST',
-            body: JSON.stringify(user),
-            crossorigin: true,
-
-        } )
-
-      .then(function(res) {
-          return res.json()})
-      .then(function (data){
-            //Si recibe un Token
-            if (data.Token){
-                componente.setState({token: data.Token,
+        loginAuth(user)
+            .then(function(res) {
+                return res.json()})
+            .then(function (data){
+                //Si recibe un Token
+                if (data.Token){
+                    componente.setState({token: data.Token,
                                      error: '',
                                      loggedIn: true})
-            }
-            //Si recibe un error de Login
-            if (data.Login){
-                console.log(data.Login);
-                componente.setState({error: 'Usuario y/o contraseña inválidos'})
-            }
-          }).catch(function(res){
-              console.log(res)
-          });
+                }
+                //Si recibe un error de Login
+                if (data.Login){
+                    console.log(data.Login);
+                    componente.setState({error: 'Usuario y/o contraseña inválidos'})
+                }
+            }).catch(function(res){
+                console.log(res)
+            });
     }
 
     componentDidUpdate(){
-        localStorage.setItem('username', this.state.username);
-        localStorage.setItem('token', this.state.token);
+        if (this.state.token !== null) {
+            localStorage.setItem('username', this.state.username);
+            localStorage.setItem('token', this.state.token);
+        }
     }
+    
 
     render() {
         if (this.state.loggedIn){

@@ -8,6 +8,7 @@ const views = [
   { path: "/home",        component: Home,        name: "Home",         icon: "home" },
   { path: "/users",       component: Users,       name: "Users",        icon: "user" },
   { path: "/app-servers", component: AppServers,  name: "App Servers",  icon: "server" },
+  
 ];
 
 export default views;

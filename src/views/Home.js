@@ -1,8 +1,34 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+
 
 class Home extends React.Component {
+    constructor(props){
+      super(props)
+      this.state = {
+          username: '',
+          token: null,
+          loggedIn: false    
+      }
+  }
+
+  componentWillMount() {
+      const username = localStorage.getItem('username');
+      const token = localStorage.getItem('token');
+      let loggedIn = true
+      if (token === null){
+          loggedIn = false
+      }
+      this.setState({username , token, loggedIn })
+  }
+
   render() {
-    return (
+      if (this.state.loggedIn === false){
+          return <Redirect to="/"/>
+      }
+
+      return (
+        
       <div>    
         <h1>Acá está Home</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. In culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -23,6 +49,7 @@ class Home extends React.Component {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in venus.</p>
       </div>
     );
+
   }
 }
 
