@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import 'rsuite/dist/styles/rsuite-default.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import Routes from './routes';
