@@ -2,7 +2,7 @@
 //import {Redirect} from 'react-router-dom'
 
 function loginAuth(user) {
-    return (fetch('/api/login',
+    return (fetch('/auth/api/login',
     {    headers: {
             'Content-Type': 'application/json',
             'Accept': 'text/plain',
@@ -16,7 +16,7 @@ function loginAuth(user) {
 }
 
 function getUsers(token){
-    return (fetch('/api/users',
+    return (fetch('/auth/api/users',
         {    headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'text/plain',
@@ -29,7 +29,7 @@ function getUsers(token){
 }
 
 function deleteUser(email,token) {
-    return (fetch('/api/users/'+email,
+    return (fetch('/auth/api/users/'+email,
     {    headers: {
             'Content-Type': 'application/json',
             'Accept': 'text/plain',
@@ -41,6 +41,24 @@ function deleteUser(email,token) {
     } ))
 
 }
+
+function getAppServerTokensFromAuth(callback) {
+    //var token = 'Bearer ' + localStorage.getItem('token');
+    var token = localStorage.getItem('token');
+    console.log('Token actual: ' + token);
+    fetch('/auth/api/app_servers/',
+      {    
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': token
+        },
+        crossorigin: true,
+      } 
+    ).then((res) => res.json())
+    .then(callback);
+}
 export {loginAuth};
 export {getUsers};
 export {deleteUser};
+export {getAppServerTokensFromAuth};
