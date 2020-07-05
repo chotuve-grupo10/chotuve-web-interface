@@ -47,7 +47,7 @@ function getAppServerTokensFromAuth(callback) {
     var token = localStorage.getItem('token');
     console.log('Token actual: ' + token);
     fetch('/auth/api/app_servers/',
-      {    
+      {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -58,7 +58,44 @@ function getAppServerTokensFromAuth(callback) {
     ).then((res) => res.json())
     .then(callback);
 }
+
+function deleteAppServerTokenFromAuth(token_to_delete, callback) {
+  var token = localStorage.getItem('token');
+  console.log('Token actual: ' + token);
+  fetch(`/auth/api/app_servers/${token_to_delete}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'authorization': token
+      },
+      crossorigin: true,
+    } 
+  ).then((res) => res.json())
+  .then(callback);
+}
+
+function createNewAppServerTokenForAuth(callback) {
+  var token = localStorage.getItem('token');
+  console.log('Token actual: ' + token);
+  fetch('/auth/api/app_servers/',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'authorization': token
+      },
+      crossorigin: true,
+    } 
+  ).then((res) => res.json())
+  .then(callback);
+}
+
 export {loginAuth};
 export {getUsers};
 export {deleteUser};
 export {getAppServerTokensFromAuth};
+export {deleteAppServerTokenFromAuth};
+export {createNewAppServerTokenForAuth};

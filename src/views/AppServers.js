@@ -1,28 +1,58 @@
 import React from 'react';
 import AppServerTokensTable from '../components/AppServerTokensTable'
-import {getAppServerTokensFromAuth} from '../apliClient'
+import {
+  getAppServerTokensFromAuth, 
+  deleteAppServerTokenFromAuth,
+  createNewAppServerTokenForAuth,
+} from '../apliClient'
+
 class AppServers extends React.Component {
   
   constructor(props){
     super(props)
     this.state = {
-        username: '',
-        token: null,
+        isAuthTableLoading: false,
         data: [],
     }
-    this.handleApiResponse = this.handleApiResponse.bind(this);
+    this.handleApiGetAuthResponse = this.handleApiGetAuthResponse.bind(this);
+    this.handleApiDeleteAuthResponse = this.handleApiDeleteAuthResponse.bind(this);
+    this.handleApiPostAuthResponse = this.handleApiPostAuthResponse.bind(this);
+    this.onAuthDelete = this.onAuthDelete.bind(this);
+    this.onAuthCreate = this.onAuthCreate.bind(this);
   }
   
-  handleApiResponse(response) {
+  handleApiGetAuthResponse(response) {
     console.log(response);
-    this.setState({data: response['App servers']});
+    this.setState({data: response['App servers'], isAuthTableLoading: false});
+  }
+
+  handleApiDeleteAuthResponse(response) {
+    console.log(response);
+    this.refreshAuthState();
+  }
+
+  handleApiPostAuthResponse(response) {
+    console.log(response);
+    this.refreshAuthState();
   }
 
   componentWillMount() {
-    const username = localStorage.getItem('username');
-    const token = localStorage.getItem('token');
-    this.setState({username , token, })
-    getAppServerTokensFromAuth(this.handleApiResponse);
+    this.refreshAuthState();
+  }
+  
+  refreshAuthState() {
+    this.setState({isAuthTableLoading: true});
+    getAppServerTokensFromAuth(this.handleApiGetAuthResponse);
+  }
+
+  onAuthDelete(event, row) {
+    this.setState({isAuthTableLoading: true});
+    deleteAppServerTokenFromAuth(row.token, this.handleApiDeleteAuthResponse);
+  }
+
+  onAuthCreate() {
+    this.setState({isAuthTableLoading: true});
+    createNewAppServerTokenForAuth(this.handleApiPostAuthResponse);
   }
 
   render() {
@@ -32,7 +62,10 @@ class AppServers extends React.Component {
         <div className="col-10">
           <AppServerTokensTable
               title="Tokens para Auth Server"
+              isLoading={this.state.isAuthTableLoading}
               data={this.state.data}
+              onDelete={this.onAuthDelete}
+              onAdd={this.onAuthCreate}
           />
         </div>
       </div>
