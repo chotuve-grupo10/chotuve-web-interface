@@ -25,7 +25,7 @@ function AppServerTokensTable (props) {
         },
         {
           icon: 'add',
-          tooltip: 'Add User',
+          tooltip: 'Add token',
           isFreeAction: true,
           onClick: props.onAdd,
         }
