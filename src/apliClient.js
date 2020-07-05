@@ -43,10 +43,14 @@ function deleteUser(email,token) {
 }
 
 function getAppServerTokensFromAuth(callback) {
+  _getAppServerTokens('/auth/api/app_servers/', callback);
+}
+
+function _getAppServerTokens(fetch_uri, callback) {
     //var token = 'Bearer ' + localStorage.getItem('token');
     var token = localStorage.getItem('token');
     console.log('Token actual: ' + token);
-    fetch('/auth/api/app_servers/',
+    fetch(fetch_uri,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -60,9 +64,13 @@ function getAppServerTokensFromAuth(callback) {
 }
 
 function deleteAppServerTokenFromAuth(token_to_delete, callback) {
+  _deleteAppServerToken(`/auth/api/app_servers/${token_to_delete}`, callback);
+}
+
+function _deleteAppServerToken(fetch_uri, callback) {
   var token = localStorage.getItem('token');
   console.log('Token actual: ' + token);
-  fetch(`/auth/api/app_servers/${token_to_delete}`,
+  fetch(fetch_uri,
     {
       method: 'DELETE',
       headers: {
@@ -77,9 +85,13 @@ function deleteAppServerTokenFromAuth(token_to_delete, callback) {
 }
 
 function createNewAppServerTokenForAuth(callback) {
+  _createNewAppServerToken('/auth/api/app_servers/', callback);
+}
+
+function _createNewAppServerToken(fetch_uri, callback) {
   var token = localStorage.getItem('token');
   console.log('Token actual: ' + token);
-  fetch('/auth/api/app_servers/',
+  fetch(fetch_uri,
     {
       method: 'POST',
       headers: {
