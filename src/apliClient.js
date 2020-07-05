@@ -46,6 +46,10 @@ function getAppServerTokensFromAuth(callback) {
   _getAppServerTokens('/auth/api/app_servers/', callback);
 }
 
+function getAppServerTokensFromMedia(callback) {
+  _getAppServerTokens('/media/api/app_servers/', callback);
+}
+
 function _getAppServerTokens(fetch_uri, callback) {
     //var token = 'Bearer ' + localStorage.getItem('token');
     var token = localStorage.getItem('token');
@@ -67,6 +71,10 @@ function deleteAppServerTokenFromAuth(token_to_delete, callback) {
   _deleteAppServerToken(`/auth/api/app_servers/${token_to_delete}`, callback);
 }
 
+function deleteAppServerTokenFromMedia(token_to_delete, callback) {
+  _deleteAppServerToken(`/media/api/app_servers/${token_to_delete}`, callback);
+}
+
 function _deleteAppServerToken(fetch_uri, callback) {
   var token = localStorage.getItem('token');
   console.log('Token actual: ' + token);
@@ -86,6 +94,10 @@ function _deleteAppServerToken(fetch_uri, callback) {
 
 function createNewAppServerTokenForAuth(callback) {
   _createNewAppServerToken('/auth/api/app_servers/', callback);
+}
+
+function createNewAppServerTokenForMedia(callback) {
+  _createNewAppServerToken('/media/api/app_servers/', callback);
 }
 
 function _createNewAppServerToken(fetch_uri, callback) {
@@ -111,3 +123,6 @@ export {deleteUser};
 export {getAppServerTokensFromAuth};
 export {deleteAppServerTokenFromAuth};
 export {createNewAppServerTokenForAuth};
+export {getAppServerTokensFromMedia};
+export {deleteAppServerTokenFromMedia};
+export {createNewAppServerTokenForMedia};
