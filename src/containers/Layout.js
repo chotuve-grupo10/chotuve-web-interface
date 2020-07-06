@@ -31,7 +31,8 @@ class Layout extends React.Component {
                   return view.component && (
                     <Route
                       key={idx}
-                      exact path={view.path}
+                      exact={view.exact}
+                      path={view.path}
                       name={view.name}
                       render={props => (
                         <view.component {...props} />
@@ -39,6 +40,7 @@ class Layout extends React.Component {
                   )
                 })}
                 <Route path="/users/:userId" name="User" render={props => <User />} />
+                <Redirect from="/" to="/home" />
               </Switch>
             </Suspense>
           </Content>
