@@ -16,7 +16,7 @@ function loginAuth(user) {
 }
 
 function getUsers(token){
-    return (fetch('/auth/api/users',
+    return (fetch('/auth/api/users/',
         {    headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'text/plain',

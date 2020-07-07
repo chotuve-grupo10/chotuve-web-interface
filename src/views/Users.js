@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom'
 import UsersList from '../components/userslist'
 import { Alert } from 'reactstrap';
 import {getUsers} from '../apliClient'
+import UsersTable from '../components/UsersTable'
 
 
 
@@ -44,19 +45,37 @@ class Users extends React.Component{
             }
         })}
 
+
+
+
+    onEdit(){
+        console.log("Editar")
+    }
+
+    onDelete(){
+        console.log("Eliminar")
+    }
+    
+
     render() {
         if (this.state.loggedIn === false){
             return <Redirect to="/login"/>
         }
         return (
-            <div>              
-                 <h1>Administración de Usuarios</h1>
+            <div>
+                <UsersTable
+                    title="Administracion de Usuarios"
+                    data={this.state.users}
+                    onEdit={this.onEdit}
+                    onDelete={this.onDelete}
+                />       
+                 {/* <h1>Administración de Usuarios</h1>
                  {
                     this.state.error !== ''? (
                         <Alert color="danger" className="text-center"> {this.state.error} </Alert>
                     ) : <UsersList users={this.state.users}/>
                 }             
-                <Link to="/home"> Volver</Link>
+                <Link to="/home"> Volver</Link> */}
             </div>
         );
     }
