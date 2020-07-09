@@ -1,6 +1,5 @@
 import React from 'react'
 import MaterialTable from 'material-table';
-import copy from 'copy-to-clipboard';
 
 function UsersTable (props) {
   console.log(props);
@@ -16,7 +15,7 @@ function UsersTable (props) {
         {
           icon: 'edit',
           tooltip: 'Edit User',
-          onClick: props.onEdit
+          onClick: props.onEdit,
         },
         {
           icon: 'delete',
@@ -30,6 +29,33 @@ function UsersTable (props) {
           onClick: props.onAdd,
         }
       ]}
+      detailPanel={[
+        {
+          icon: 'account_circle',
+          tooltip: 'Show Surname',
+          render: rowData => {
+            return (
+              <div
+                style={{
+                  fontSize: 15,
+                  textAlign: 'left',
+                //   color: 'black',
+                  backgroundColor: '#EEEAEF',
+                }}
+              >
+               <tr>
+                   <td><img src={rowData["profile picture"]} alt="Profile"/></td>
+                   <td>
+                       <p>Fullname: {rowData["full name"]}</p>
+                       <p>Email: {rowData.email}</p>
+                       <p>Phone number: {rowData["phone number"]}</p>
+                    </td>
+               </tr>
+              </div>
+            )
+          },
+        },]}
+      
       options={{
         search: true,
         actionsColumnIndex: -1

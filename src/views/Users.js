@@ -1,7 +1,5 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom'
-import UsersList from '../components/userslist'
-import { Alert } from 'reactstrap';
+import {Redirect} from 'react-router-dom'
 import {getUsers} from '../apliClient'
 import UsersTable from '../components/UsersTable'
 
@@ -48,8 +46,8 @@ class Users extends React.Component{
 
 
 
-    onEdit(){
-        console.log("Editar")
+    onEdit(row){
+        console.log("Editar "+row.email)
     }
 
     onDelete(){
@@ -62,7 +60,7 @@ class Users extends React.Component{
             return <Redirect to="/login"/>
         }
         return (
-            <div>
+            <div className="row">
                 <UsersTable
                     title="Administracion de Usuarios"
                     data={this.state.users}
