@@ -15,7 +15,8 @@ function loginAuth(user) {
    
 }
 
-function getUsers(token){
+function getUsers(callback){
+    var token = localStorage.getItem('token');
     return (fetch('/auth/api/users/',
         {    headers: {
                 'Content-Type': 'application/json',
@@ -25,21 +26,12 @@ function getUsers(token){
             method: 'GET',
             crossorigin: true,
 
-        }))
+        })).then((res) => res.json())
+        .then(callback);
 }
 
-function deleteUser(email,token) {
-    return (fetch('/auth/api/users/'+email,
-    {    headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'text/plain',
-            'authorization': token
-        },
-        method: 'DELETE',
-        crossorigin: true,
-
-    } ))
-
+function deleteUser(email,callback) {
+  _deleteUser(`/auth/api/users/${email}`, callback)
 }
 
 function getAppServerTokensFromAuth(callback) {
@@ -73,6 +65,23 @@ function deleteAppServerTokenFromAuth(token_to_delete, callback) {
 
 function deleteAppServerTokenFromMedia(token_to_delete, callback) {
   _deleteAppServerToken(`/media/api/app_servers/${token_to_delete}`, callback);
+}
+
+function _deleteUser(fetch_uri, callback) {
+    var token = localStorage.getItem('token');
+    console.log('Token actual: ' + token);
+    fetch(fetch_uri,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'authorization': token
+        },
+        crossorigin: true,
+      } 
+    ).then((res) => res.json())
+    .then(callback);
 }
 
 function _deleteAppServerToken(fetch_uri, callback) {

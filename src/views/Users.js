@@ -1,6 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom'
-import {getUsers} from '../apliClient'
+import {getUsers, deleteUser} from '../apliClient'
 import UsersTable from '../components/UsersTable'
 
 
@@ -14,8 +14,13 @@ class Users extends React.Component{
             token: null,
             loggedIn: false,
             error: '',
-            users:[]   
+            users:[],
+            isUsersLoading: false
         }
+        this.onEdit= this.onEdit.bind(this);
+        this.onDelete= this.onDelete.bind(this);
+        this.handleApiGetAuthResponse= this.handleApiGetAuthResponse.bind(this);
+        this.handleApiUserDeleteAuthResponse= this.handleApiUserDeleteAuthResponse.bind(this);
     }
     
     componentWillMount() {
@@ -29,31 +34,39 @@ class Users extends React.Component{
     }
 
     componentDidMount(){
-        const token = this.state.token;
-        let componente = this;
-        getUsers(token)
-        .then(function(res) {
-            return res.json()})
-        .then(function (data){
-            console.log(data.Error)
-            if(data.Error !== undefined){
-                componente.setState({error: 'Usted no puede administrar usuarios pues no es usuario administrador'})
-            } else {
-                componente.setState({users: data})
-            }
-        })}
-
-
-
-
-    onEdit(row){
-        console.log("Editar "+row.email)
+        getUsers(this.handleApiGetAuthResponse)
     }
 
-    onDelete(){
-        console.log("Eliminar")
+    onEdit(event,row){
+        console.log(row.email)
+        this.setState({isUsersLoading: true});
+        this.refreshUsers()
+    }
+
+    onDelete(event,row){
+        this.setState({isUsersLoading: true});
+        deleteUser(row.email, this.handleApiUserDeleteAuthResponse);
+    }
+
+    handleApiUserDeleteAuthResponse(response) {
+        console.log(response);
+        this.refreshUsers();
     }
     
+
+    refreshUsers() {
+        this.setState({isUsersLoading: true});
+        getUsers(this.handleApiGetAuthResponse);
+    }
+
+    handleApiGetAuthResponse(response) {
+        console.log(response);
+        if(response.Error !== undefined){
+            this.setState({isUsersLoading: false, error: 'Usted no puede administrar usuarios pues no es usuario administrador'})
+        } else {
+            this.setState({isUsersLoading: false, users: response})
+        }
+      }
 
     render() {
         if (this.state.loggedIn === false){
@@ -61,8 +74,10 @@ class Users extends React.Component{
         }
         return (
             <div className="row">
+                <div className="col-10">
                 <UsersTable
                     title="Administracion de Usuarios"
+                    isLoading={this.state.isUsersLoading}
                     data={this.state.users}
                     onEdit={this.onEdit}
                     onDelete={this.onDelete}
@@ -74,6 +89,7 @@ class Users extends React.Component{
                     ) : <UsersList users={this.state.users}/>
                 }             
                 <Link to="/home"> Volver</Link> */}
+                </div>
             </div>
         );
     }
