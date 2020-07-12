@@ -9,6 +9,13 @@ function UsersTable (props) {
       columns={[
         { title: 'Name', field: 'full name' },
         { title: 'Email', field: 'email' },
+        { title: 'Status', field: 'blocked',
+          render: rowData => {  if (rowData.blocked){
+                                  return <b><font color="red">Disabled</font></b>
+                                }else{
+                                  return <b><font color="green">Enabled</font></b>
+                                }
+                             }  }
       ]}
       data={props.data}
        actions={[
