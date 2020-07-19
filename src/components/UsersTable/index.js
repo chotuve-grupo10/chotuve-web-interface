@@ -1,14 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MaterialTable from 'material-table';
 
 function UsersTable (props) {
   console.log(props);
+  const data = useState(props.data);
   return (
     <MaterialTable
       title={props.title}
       columns={[
         { title: 'Name', field: 'full name' },
         { title: 'Email', field: 'email' },
+        { title: 'Phone Number', field: 'phone number',
+          render: rowData => {if (rowData["phone number"] !== 'NULL'){
+                                  return rowData["phone number"]
+                              } 
+        }},
         { title: 'Status', field: 'blocked',
           render: rowData => {  if (rowData.blocked){
                                   return <b><font color="red">Disabled</font></b>
@@ -17,24 +23,19 @@ function UsersTable (props) {
                                 }
                              }  }
       ]}
-      data={props.data}
-       actions={[
-        {
+      data={data}
+      actions={[
+      {
           icon: 'edit',
           tooltip: 'Edit User',
           onClick: props.onEdit,
-        },
-        {
+      },
+      {
           icon: 'delete',
           tooltip: 'Delete User',
           onClick: props.onDelete,
         }, 
-        {
-          icon: 'add',
-          tooltip: 'Add User',
-          isFreeAction: true,
-          onClick: props.onAdd,
-        }
+        
       ]}
       detailPanel={[
         {

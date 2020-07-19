@@ -30,6 +30,11 @@ function getUsers(callback){
         .then(callback);
 }
 
+function modifyUser(data, callback){
+  _modifyUser(`/auth/api/users/${data.email}`, data, callback)
+}
+
+
 function deleteUser(email,callback) {
   _deleteUser(`/auth/api/users/${email}`, callback)
 }
@@ -84,6 +89,24 @@ function _deleteUser(fetch_uri, callback) {
     .then(callback);
 }
 
+function _modifyUser(fetch_uri, data, callback) {
+  var token = localStorage.getItem('token');
+  console.log('Token actual: ' + token);
+  fetch(fetch_uri,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'authorization': token
+      },
+      body: JSON.stringify(data),
+      crossorigin: true,
+    } 
+  ).then((res) => res.json())
+  .then(callback);
+}
+
 function _deleteAppServerToken(fetch_uri, callback) {
   var token = localStorage.getItem('token');
   console.log('Token actual: ' + token);
@@ -129,6 +152,7 @@ function _createNewAppServerToken(fetch_uri, callback) {
 export {loginAuth};
 export {getUsers};
 export {deleteUser};
+export {modifyUser};
 export {getAppServerTokensFromAuth};
 export {deleteAppServerTokenFromAuth};
 export {createNewAppServerTokenForAuth};

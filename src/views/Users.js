@@ -1,7 +1,9 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom'
-import {getUsers, deleteUser} from '../apliClient'
+import {getUsers, deleteUser, modifyUser} from '../apliClient'
 import UsersTable from '../components/UsersTable'
+import EditUserModal from '../components/EditUserModal'
+
 
 
 
@@ -15,12 +17,17 @@ class Users extends React.Component{
             loggedIn: false,
             error: '',
             users:[],
-            isUsersLoading: false
+            isUsersLoading: false,
+            editModal: false,
+            editRow:''
         }
         this.onEdit= this.onEdit.bind(this);
+        this.saveChanges= this.saveChanges.bind(this);
+        this.closeChanges= this.closeChanges.bind(this);
         this.onDelete= this.onDelete.bind(this);
         this.handleApiGetAuthResponse= this.handleApiGetAuthResponse.bind(this);
         this.handleApiUserDeleteAuthResponse= this.handleApiUserDeleteAuthResponse.bind(this);
+        this.handleApiUserModifyAuthResponse = this.handleApiUserModifyAuthResponse.bind(this);
     }
     
     componentWillMount() {
@@ -38,9 +45,17 @@ class Users extends React.Component{
     }
 
     onEdit(event,row){
-        console.log(row.email)
-        this.setState({isUsersLoading: true});
-        this.refreshUsers()
+        this.setState({editRow: row})
+        this.setState({editModal: true});
+    }
+
+    saveChanges(user){
+        this.setState({editModal: false})
+        modifyUser(user, this.handleApiUserModifyAuthResponse)     
+    }
+
+    closeChanges(){
+        this.setState({editModal: false})
     }
 
     onDelete(event,row){
@@ -53,6 +68,10 @@ class Users extends React.Component{
         this.refreshUsers();
     }
     
+    handleApiUserModifyAuthResponse(response) {
+        console.log(response);
+        this.refreshUsers();
+    }   
 
     refreshUsers() {
         this.setState({isUsersLoading: true});
@@ -67,6 +86,7 @@ class Users extends React.Component{
             this.setState({isUsersLoading: false, users: response})
         }
       }
+    
 
     render() {
         if (this.state.loggedIn === false){
@@ -75,6 +95,7 @@ class Users extends React.Component{
         return (
             <div className="row">
                 <div className="col-10">
+                    
                 <UsersTable
                     title="Administracion de Usuarios"
                     isLoading={this.state.isUsersLoading}
@@ -82,13 +103,11 @@ class Users extends React.Component{
                     onEdit={this.onEdit}
                     onDelete={this.onDelete}
                 />       
-                 {/* <h1>Administración de Usuarios</h1>
-                 {
-                    this.state.error !== ''? (
-                        <Alert color="danger" className="text-center"> {this.state.error} </Alert>
-                    ) : <UsersList users={this.state.users}/>
-                }             
-                <Link to="/home"> Volver</Link> */}
+                <EditUserModal show={this.state.editModal}
+                              row={this.state.editRow}
+                              saveChanges={this.saveChanges}
+                              closeChanges={this.closeChanges}
+                              />
                 </div>
             </div>
         );
