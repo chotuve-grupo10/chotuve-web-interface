@@ -10,6 +10,7 @@ export class EditUserModal extends React.Component{
             fullName: '',
             phoneNumber: '',
             profilePicture: '',
+            status: '',
             srcProfile:'',
             show: false
         }
@@ -24,6 +25,7 @@ export class EditUserModal extends React.Component{
             fullName: nextProps.row["full name"],
             phoneNumber: nextProps.row["phone number"],
             profilePicture: nextProps.row["profile picture"],
+            status: (nextProps.row.blocked === "1")? "Deshabilitado":"Habilitado",
             srcProfile: nextProps.row["profile picture"],
             show: nextProps.show,
         });
@@ -61,22 +63,26 @@ export class EditUserModal extends React.Component{
             <div>
             <Modal style={{opacity:1}} show={this.state.show} size="sm" aria-labelledby="contained-modal-title-vcenter" centered >
                 <Modal.Header>
-                    <Modal.Title>Edit User</Modal.Title>
+                    <Modal.Title>Editar Usuario</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <img src={this.state.srcProfile} onError={(e) => this.addDefaultSrc(e)} class="profileCircle"  alt="profile"/>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label>Email</Form.Label>
                         <Form.Control type="email" readOnly defaultValue={this.state.email} />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Full name</Form.Label>
+                        <Form.Label>Nombre</Form.Label>
                         <Form.Control  defaultValue={this.state.fullName} onChange={(e) => this.fullNameHandler(e)} />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Phone number</Form.Label>
+                        <Form.Label>Teléfono</Form.Label>
                         <Form.Control  defaultValue={this.state.phoneNumber} onChange={(e) => this.phoneNumberHandler(e)} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Estado</Form.Label>
+                        <Form.Control  readOnly defaultValue={this.state.status}/>
                     </Form.Group>
                 </Form></Modal.Body>
                 <Modal.Footer>

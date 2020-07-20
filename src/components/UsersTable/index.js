@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import MaterialTable from 'material-table';
 
+
 function UsersTable (props) {
   console.log(props);
   const data = useState(props.data);
@@ -8,18 +9,18 @@ function UsersTable (props) {
     <MaterialTable
       title={props.title}
       columns={[
-        { title: 'Name', field: 'full name' },
+        { title: 'Nombre', field: 'full name' },
         { title: 'Email', field: 'email' },
-        { title: 'Phone Number', field: 'phone number',
+        { title: 'Teléfono', field: 'phone number',
           render: rowData => {if (rowData["phone number"] !== 'NULL'){
                                   return rowData["phone number"]
                               } 
         }},
-        { title: 'Status', field: 'blocked',
+        { title: 'Estado', field: 'blocked',
           render: rowData => {  if (rowData.blocked){
-                                  return <b><font color="red">Disabled</font></b>
+                                  return <b><font color="red">Deshabilitado</font></b>
                                 }else{
-                                  return <b><font color="green">Enabled</font></b>
+                                  return <b><font color="green">Habilitado</font></b>
                                 }
                              }  }
       ]}
@@ -37,32 +38,6 @@ function UsersTable (props) {
         }, 
         
       ]}
-      detailPanel={[
-        {
-          icon: 'account_circle',
-          tooltip: 'Show Surname',
-          render: rowData => {
-            return (
-              <div
-                style={{
-                  fontSize: 15,
-                  textAlign: 'left',
-                //   color: 'black',
-                  backgroundColor: '#EEEAEF',
-                }}
-              >
-               <tr>
-                   <td><img src={rowData["profile picture"]} class="profileCircle" alt="Profile"/></td>
-                   <td>
-                       <p>Fullname: {rowData["full name"]}</p>
-                       <p>Email: {rowData.email}</p>
-                       <p>Phone number: {rowData["phone number"]}</p>
-                    </td>
-               </tr>
-              </div>
-            )
-          },
-        },]}
       
       options={{
         search: true,
