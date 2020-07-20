@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Modal, Form} from 'react-bootstrap'
+import notFound from './notFound.png'
 
 export class EditUserModal extends React.Component{
     constructor(props){
@@ -9,6 +10,7 @@ export class EditUserModal extends React.Component{
             fullName: '',
             phoneNumber: '',
             profilePicture: '',
+            srcProfile:'',
             show: false
         }
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,6 +24,7 @@ export class EditUserModal extends React.Component{
             fullName: nextProps.row["full name"],
             phoneNumber: nextProps.row["phone number"],
             profilePicture: nextProps.row["profile picture"],
+            srcProfile: nextProps.row["profile picture"],
             show: nextProps.show,
         });
     }
@@ -47,15 +50,21 @@ export class EditUserModal extends React.Component{
     phoneNumberHandler(e){
         this.setState({ phoneNumber: e.target.value});
     }
+
+    addDefaultSrc(event){
+        event.target.src = {notFound};
+        event.target.onerror = null;
+        this.setState({srcProfile: notFound})
+    }
     render(){
         return(
             <div>
-            <Modal style={{opacity:1}} show={this.state.show} size="lg" aria-labelledby="contained-modal-title-vcenter" centered >
+            <Modal style={{opacity:1}} show={this.state.show} size="sm" aria-labelledby="contained-modal-title-vcenter" centered >
                 <Modal.Header>
                     <Modal.Title>Edit User</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <img src={this.state.profilePicture}  class="img-fluid" alt="Profile" />
+                <img src={this.state.srcProfile} onError={(e) => this.addDefaultSrc(e)} class="profileCircle"  alt="profile"/>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>

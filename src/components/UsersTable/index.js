@@ -52,7 +52,7 @@ function UsersTable (props) {
                 }}
               >
                <tr>
-                   <td><img src={rowData["profile picture"]} alt="Profile"/></td>
+                   <td><img src={rowData["profile picture"]} class="profileCircle" alt="Profile"/></td>
                    <td>
                        <p>Fullname: {rowData["full name"]}</p>
                        <p>Email: {rowData.email}</p>
