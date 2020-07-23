@@ -1,8 +1,9 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom'
-import UsersList from '../components/userslist'
-import { Alert } from 'reactstrap';
-import {getUsers} from '../apliClient'
+import {Redirect} from 'react-router-dom'
+import {getUsers, deleteUser, modifyUser} from '../apliClient'
+import UsersTable from '../components/UsersTable'
+import EditUserModal from '../components/EditUserModal'
+
 
 
 
@@ -15,8 +16,18 @@ class Users extends React.Component{
             token: null,
             loggedIn: false,
             error: '',
-            users:[]   
+            users:[],
+            isUsersLoading: false,
+            editModal: false,
+            editRow:''
         }
+        this.onEdit= this.onEdit.bind(this);
+        this.saveChanges= this.saveChanges.bind(this);
+        this.closeChanges= this.closeChanges.bind(this);
+        this.onDelete= this.onDelete.bind(this);
+        this.handleApiGetAuthResponse= this.handleApiGetAuthResponse.bind(this);
+        this.handleApiUserDeleteAuthResponse= this.handleApiUserDeleteAuthResponse.bind(this);
+        this.handleApiUserModifyAuthResponse = this.handleApiUserModifyAuthResponse.bind(this);
     }
     
     componentWillMount() {
@@ -30,33 +41,74 @@ class Users extends React.Component{
     }
 
     componentDidMount(){
-        const token = this.state.token;
-        let componente = this;
-        getUsers(token)
-        .then(function(res) {
-            return res.json()})
-        .then(function (data){
-            console.log(data.Error)
-            if(data.Error !== undefined){
-                componente.setState({error: 'Usted no puede administrar usuarios pues no es usuario administrador'})
-            } else {
-                componente.setState({users: data})
-            }
-        })}
+        getUsers(this.handleApiGetAuthResponse)
+    }
+
+    onEdit(event,row){
+        this.setState({editRow: row})
+        this.setState({editModal: true});
+    }
+
+    saveChanges(user){
+        this.setState({editModal: false})
+        modifyUser(user, this.handleApiUserModifyAuthResponse)     
+    }
+
+    closeChanges(){
+        this.setState({editModal: false})
+    }
+
+    onDelete(event,row){
+        this.setState({isUsersLoading: true});
+        deleteUser(row.email, this.handleApiUserDeleteAuthResponse);
+    }
+
+    handleApiUserDeleteAuthResponse(response) {
+        console.log(response);
+        this.refreshUsers();
+    }
+    
+    handleApiUserModifyAuthResponse(response) {
+        console.log(response);
+        this.refreshUsers();
+    }   
+
+    refreshUsers() {
+        this.setState({isUsersLoading: true});
+        getUsers(this.handleApiGetAuthResponse);
+    }
+
+    handleApiGetAuthResponse(response) {
+        console.log(response);
+        if(response.Error !== undefined){
+            this.setState({isUsersLoading: false, error: 'Usted no puede administrar usuarios pues no es usuario administrador'})
+        } else {
+            this.setState({isUsersLoading: false, users: response})
+        }
+      }
+    
 
     render() {
         if (this.state.loggedIn === false){
             return <Redirect to="/login"/>
         }
         return (
-            <div>              
-                 <h1>Administración de Usuarios</h1>
-                 {
-                    this.state.error !== ''? (
-                        <Alert color="danger" className="text-center"> {this.state.error} </Alert>
-                    ) : <UsersList users={this.state.users}/>
-                }             
-                <Link to="/home"> Volver</Link>
+            <div className="row">
+                <div className="col-10">
+                    
+                <UsersTable
+                    title="Administracion de Usuarios"
+                    isLoading={this.state.isUsersLoading}
+                    data={this.state.users}
+                    onEdit={this.onEdit}
+                    onDelete={this.onDelete}
+                />       
+                <EditUserModal show={this.state.editModal}
+                              row={this.state.editRow}
+                              saveChanges={this.saveChanges}
+                              closeChanges={this.closeChanges}
+                              />
+                </div>
             </div>
         );
     }

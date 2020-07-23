@@ -5,7 +5,7 @@ import {Link, useLocation} from "react-router-dom";
 function User() {
  let data = useLocation();
  //const token = localStorage.getItem('token');
- console.log(data.state.user); 
+ console.log("data!:"+data.state.user); 
  return (
         <div>
             <img src={data.state.user["profile picture"]} alt="Profile"/>
