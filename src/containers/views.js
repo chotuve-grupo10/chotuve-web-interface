@@ -7,7 +7,9 @@ const AppServers = React.lazy(() => import('../views/AppServers'));
 const views = [
   { path: "/home",        component: Home,        name: "Home",         icon: "home" },
   { path: "/users",       component: Users,       name: "Users",        icon: "user" , exact: true},
-  { path: "/app-servers", component: AppServers,  name: "App Servers",  icon: "server" },
+  { name: "App Servers", icon: "server", subItems: [
+    { path: "/app-servers",   component: AppServers,    name: "Tokens"},
+  ]},
   
 ];
 
