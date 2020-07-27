@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const {createProxyMiddleware} = require("http-proxy-middleware");
+var https = require('https');
 
 const port = process.env.PORT || 3000;
 
@@ -15,6 +16,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(
   createProxyMiddleware('/auth/api', {
     target: auth_target,
+    agent: https.globalAgent,
     pathRewrite: {
       "^/auth/api": "/api"
     },
