@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Alert } from 'reactstrap';
 import {loginAuth} from '../../apliClient'
+import decode from "jwt-decode";
 
 //import {startUi} from '../../services/firebase';
 
@@ -50,10 +50,15 @@ class Login extends React.Component{
             .then(function (data){
                 //Si recibe un Token
                 if (data.Token){
-                    componente.setState({token: data.Token,
-                                     error: '',
-                                     loggedIn: true})
-                }
+                    const decoded = decode(data.Token);
+                    if(decoded.admin_user) {
+                        componente.setState({token: data.Token,
+                                            error: '',
+                                            loggedIn: true})
+                    }else{
+                        componente.setState({error: 'Usted no es usuario administrador'})
+                    }
+                }     
                 //Si recibe un error de Login
                 if (data.Login){
                     console.log(data.Login);
@@ -83,7 +88,7 @@ class Login extends React.Component{
                 <hr  className="my-3"/>
                 {
                     this.state.error !== ''? (
-                        <Alert color="danger" className="text-center"> {this.state.error} </Alert>
+                        <div class="alert alert-danger" role="alert"> {this.state.error} </div>
                     ) : ''
                 }
             <form onSubmit={this.submitForm}>
