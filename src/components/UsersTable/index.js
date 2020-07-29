@@ -26,16 +26,18 @@ function UsersTable (props) {
       ]}
       data={data}
       actions={[
-      {
+      rowData => ({
           icon: 'edit',
           tooltip: 'Edit User',
           onClick: props.onEdit,
-      },
-      {
+          disabled: rowData.blocked === true
+      }),
+      rowData => ({
           icon: 'delete',
           tooltip: 'Delete User',
           onClick: props.onDelete,
-        }, 
+          disabled: rowData.blocked === true
+      })
         
       ]}
       
