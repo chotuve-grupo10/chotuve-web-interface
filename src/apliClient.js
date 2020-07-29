@@ -131,7 +131,7 @@ function _deleteAppServerToken(fetch_uri, callback) {
 }
 
 function createNewAppServerTokenForAuth(callback) {
-  _createNewAppServerToken('/auth/api/app_servers/', callback);
+  _createNewAppServerToken(target+'api/app_servers/', callback);
 }
 
 function createNewAppServerTokenForMedia(callback) {
