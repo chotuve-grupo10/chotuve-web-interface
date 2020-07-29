@@ -46,7 +46,7 @@ function deleteUser(email,callback) {
 }
 
 function getAppServerTokensFromAuth(callback) {
-  _getAppServerTokens('/auth/api/app_servers/', callback);
+  _getAppServerTokens(target+'api/app_servers/', callback);
 }
 
 function getAppServerTokensFromMedia(callback) {
@@ -71,7 +71,7 @@ function _getAppServerTokens(fetch_uri, callback) {
 }
 
 function deleteAppServerTokenFromAuth(token_to_delete, callback) {
-  _deleteAppServerToken(`/auth/api/app_servers/${token_to_delete}`, callback);
+  _deleteAppServerToken(target+`api/app_servers/${token_to_delete}`, callback);
 }
 
 function deleteAppServerTokenFromMedia(token_to_delete, callback) {
