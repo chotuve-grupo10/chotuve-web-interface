@@ -12,18 +12,9 @@ const auth_target = `${process.env.REACT_APP_AUTH_SERVER || process.env.AUTH_SER
 const media_fallback_target = 'https://chotuve-media-server-dev.herokuapp.com/';
 const media_target = `${process.env.REACT_APP_MEDIA_SERVER || process.env.MEDIA_SERVER || media_fallback_target}`;
 
+
 app.use(express.static(path.join(__dirname, 'build')));
-app.use(
-  createProxyMiddleware('/auth/api', {
-    target: auth_target,
-    agent: https.globalAgent,
-    pathRewrite: {
-      "^/auth/api": "/api"
-    },
-    changeOrigin: true,
-    logLevel: 'debug',
-  })
-);
+
 app.use(
   createProxyMiddleware('/media/api', {
     target: media_target,

@@ -34,9 +34,9 @@ export class EditUserModal extends React.Component{
     onSubmit(){
         const user = { 
             email:this.state.email,
-            "full name": this.state.fullName,
-            "phone number": this.state.phoneNumber,
-            "profile picture": this.state.profilePicture,
+            "full_name": this.state.fullName,
+            "phone_number": this.state.phoneNumber,
+            "profile_picture": this.state.profilePicture,
         }
         this.props.saveChanges(user)
     }
