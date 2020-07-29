@@ -38,6 +38,7 @@ class Users extends React.Component{
             loggedIn = false
         }
         this.setState({username , token, loggedIn })
+        this.refreshUsers();
     }
 
     componentDidMount(){
@@ -51,6 +52,7 @@ class Users extends React.Component{
 
     saveChanges(user){
         this.setState({editModal: false})
+        this.setState({isUsersLoading: true});
         modifyUser(user, this.handleApiUserModifyAuthResponse)     
     }
 
@@ -85,6 +87,7 @@ class Users extends React.Component{
         } else {
             this.setState({isUsersLoading: false, users: response})
         }
+        this.setState({isUsersLoading: false});
       }
     
 
