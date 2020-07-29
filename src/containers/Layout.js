@@ -39,8 +39,26 @@ class Layout extends React.Component {
                       )} />
                   )
                 })}
+                {views.map((view, idx) => {
+                  return view.subItems && (
+                    <Switch key={idx}>
+                    {view.subItems.map((subView, subIdx) => {
+                      return (
+                        <Route
+                          key={idx + '.' + subIdx}
+                          exact={subView.exact}
+                          path={subView.path}
+                          name={subView.name}
+                          render={props => (
+                            <subView.component {...props} />
+                          )} />
+                      )
+                      })}
+                    </Switch>
+                  )
+                })}
                 <Route path="/users/:userId" name="User" render={props => <User />} />
-                <Redirect from="/" to="/home" />
+                <Route exact path="/" render={() => (<Redirect to="/home" />)} />
               </Switch>
             </Suspense>
           </Content>

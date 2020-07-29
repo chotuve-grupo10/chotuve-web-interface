@@ -9,7 +9,7 @@ import {
   createNewAppServerTokenForMedia,
 } from '../apliClient'
 
-class AppServers extends React.Component {
+class AppServerTokens extends React.Component {
   
   constructor(props){
     super(props)
@@ -121,4 +121,4 @@ class AppServers extends React.Component {
   }
 }
 
-export default AppServers;
+export default AppServerTokens;

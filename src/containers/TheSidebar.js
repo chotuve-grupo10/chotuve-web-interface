@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { Icon, Nav, Sidenav } from 'rsuite'
+import { Icon, Nav, Sidenav, Dropdown } from 'rsuite'
 import views from './views'
 
 class TheSidebar extends React.Component {
@@ -11,12 +11,23 @@ class TheSidebar extends React.Component {
         <Sidenav.Body>
           <Nav>
             {views.map((view, idx) => {
-              return (
-                <Link to={view.path}>
+              return (view.component && (
+                <Link key={idx} to={view.path}>
                   <Nav.Item eventKey={idx} icon={<Icon icon={view.icon} />}>
                     {view.name}
                   </Nav.Item>
                 </Link>
+              )) || (view.subItems && (
+                <Dropdown key={idx} title={view.name} icon={<Icon icon={view.icon} />}>
+                  {view.subItems.map((subView, subIdx) => {
+                    return(
+                      <Link key={idx + '.' + subIdx} to={subView.path}>
+                        <Dropdown.Item>{subView.name}</Dropdown.Item>
+                      </Link>
+                    )
+                  })}
+                </Dropdown>
+                )
               )
             })}
           </Nav>
