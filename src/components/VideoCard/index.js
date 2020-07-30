@@ -10,11 +10,11 @@ class VideoCard extends React.Component {
       description: props.description,
       fileSize: props.fileSize,
       elementId: props.elementId,
-      onDelete: function() {props.onDelete(props.elementId)}
+      onDelete: function() {props.onDelete(props.elementId)},
     }
   }
 
-  render() {
+  render(props) {
     return (
       <div className="card flex-row flex-wrap">
         <div className="card-header border-0">

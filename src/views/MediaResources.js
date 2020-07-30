@@ -17,7 +17,7 @@ class MediaResources extends React.Component {
     };
     this.handleApiGetResponse = this.handleApiGetResponse.bind(this);
     this.handleApiDeleteResponse = this.handleApiDeleteResponse.bind(this);
-    // this.deleteResource = this.deleteResource.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   handleApiGetResponse(response) {
@@ -26,6 +26,7 @@ class MediaResources extends React.Component {
   }
 
   handleApiDeleteResponse(response) {
+    console.log('Se terminó de eliminar el video');
     console.log(response);
     this.refreshState();
   }
@@ -40,8 +41,7 @@ class MediaResources extends React.Component {
   }
 
   onDelete(elementId) {
-    var deleteResourceFunction = this.deleteResource;
-    console.log(deleteResourceFunction);
+    console.log(this);
     var options = {
       title: 'Confirmar eliminación',
       message: '¿Está segur@ de querer eliminar el recurso?',
@@ -50,7 +50,8 @@ class MediaResources extends React.Component {
           label: 'Sí',
           onClick: () => {
             console.log(`Eliminando ${elementId}`);
-            deleteMediaResource(elementId, this.handleApiDeleteResponse);            
+            deleteMediaResource(elementId, this.handleApiDeleteResponse);
+            console.log('Se disparó el método para eliminar');
           }
         },
         {
@@ -64,20 +65,16 @@ class MediaResources extends React.Component {
   render() {
     return (
       <div>
-        {this.state.isLoading && <Spinner />}
         {this.state.mediaResources.map((resource, idx) => {
           return (
-            <div>
-              {!this.state.isLoading &&
-                <VideoCard key={resource._id}
+              <VideoCard key={resource._id}
                     elementId={resource._id}
                     imgSrc={resource.thumbnail} 
                     title={resource.title} 
                     description={resource.description} 
                     fileSize={resource.size}
-                    onDelete={this.onDelete} />
-              }
-            </div>
+                    onDelete={this.onDelete}
+                    bindObject={this} />
           )}
         )}
       </div>
