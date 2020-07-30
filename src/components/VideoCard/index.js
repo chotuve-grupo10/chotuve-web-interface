@@ -9,8 +9,9 @@ class VideoCard extends React.Component {
       title: props.title,
       description: props.description,
       fileSize: props.fileSize,
+      elementId: props.elementId,
+      onDelete: function() {props.onDelete(props.elementId)}
     }
-    this.onClick = props.onClick ? props.onClick.bind(this) : null;
   }
 
   render() {
@@ -24,11 +25,11 @@ class VideoCard extends React.Component {
             <div className="col-11">
               <h4 className="card-title">{this.state.title}</h4>
               <p className="card-text">{this.state.description}</p>
-              <p style={{'font-size': '0.9em', color: 'grey'}}>Size: {this.state.fileSize}</p>
+              <p style={{'fontSize': '0.9em', color: 'grey'}}>Size: {this.state.fileSize}</p>
             </div>
             <div className="col-1">
                 <Icon className="justify-content-center" icon="trash" size="3x" 
-                onClick={this.onClick}/>
+                onClick={this.state.onDelete}/>
             </div>
           </div>
           <div className="w-100"></div>
