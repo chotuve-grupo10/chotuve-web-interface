@@ -155,6 +155,21 @@ function _createNewAppServerToken(fetch_uri, callback) {
   .then(callback);
 }
 
+function getMediaResources(callback) {
+  var token = localStorage.getItem('token');
+  fetch('/media/api/videos/',
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token
+      },
+      crossorigin: true,
+    } 
+  ).then((res) => res.json())
+  .then(callback);
+}
+
 export {loginAuth};
 export {getUsers};
 export {deleteUser};
@@ -165,3 +180,4 @@ export {createNewAppServerTokenForAuth};
 export {getAppServerTokensFromMedia};
 export {deleteAppServerTokenFromMedia};
 export {createNewAppServerTokenForMedia};
+export {getMediaResources};
