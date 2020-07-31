@@ -6,7 +6,6 @@ import {
   getMediaResources,
   deleteMediaResource,
 } from '../apliClient';
-import Spinner from '../components/Spinner/Spinner';
 
 class MediaResources extends React.Component {
   constructor(props){
