@@ -4,14 +4,38 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
+    "@date-io/date-fns": "^2.6.2",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "copy-to-clipboard": "^3.3.1",
+    "cors": "^2.8.5",
+    "date-fns": "^2.0.0-beta.5",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^1.8.0",
+    "express": "^4.17.1",
+    "firebase": "^7.14.3",
+    "firebaseui": "^4.5.0",
+    "font-awesome": "^4.7.0",
+    "http-proxy-middleware": "^1.0.4",
+    "jwt-decode": "^2.2.0",
+    "material-table": "^1.63.1",
     "react": "^16.8.6",
+    "react-alert": "^7.0.1",
+    "react-bootstrap": "^1.0.1",
+    "react-confirm-alert": "^2.6.1",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "reactstrap": "^8.4.1",
     "request": "^2.88.2",
-    "socket.io": "^2.3.0"
+    "rsuite": "^4.7.5",
+    "socket.io": "^2.3.0",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,17 +59,14 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-strongloop": "^2.1.0",
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "eslint": "^6.8.0",
+    "eslint-config-strongloop": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
-    "react-hot-loader": "^4.8.4",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.3.1"
+    "react-hot-loader": "^4.8.4"
   }
 }

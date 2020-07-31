@@ -1,0 +1,32 @@
+.fondoNegro {
+  background-color: green
+}
+
+.fondoRojo {
+  background-color: red
+}
+
+.brand-text {
+  font-size: 1.5em;
+}
+
+.profileCircle {
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: 100px;
+}
+
+.card {
+  margin: 30px;
+}
+
+body {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 26px;
+}
